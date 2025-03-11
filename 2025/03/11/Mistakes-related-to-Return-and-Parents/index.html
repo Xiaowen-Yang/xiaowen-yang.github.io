@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="In today’s course, I made two mistakes about the return and function’s parent. I think it is a good place to document the reasons and avoid same errors later. ReturnSometimes, when we create a frame_1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mistakes related to Return and Parents">
+<meta property="og:url" content="http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/index.html">
+<meta property="og:site_name" content="Xiaowen Yang">
+<meta property="og:description" content="In today’s course, I made two mistakes about the return and function’s parent. I think it is a good place to document the reasons and avoid same errors later. ReturnSometimes, when we create a frame_1">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image/image-20250311220331108.png">
+<meta property="og:image" content="http://example.com/image/image-20250311222406183.png">
+<meta property="og:image" content="http://example.com/image/image-20250311232918892.png">
+<meta property="og:image" content="http://example.com/image/image-20250311234735651.png">
+<meta property="article:published_time" content="2025-03-11T13:05:59.000Z">
+<meta property="article:modified_time" content="2025-03-11T15:59:40.841Z">
+<meta property="article:author" content="Xiaowen Yang">
+<meta property="article:tag" content="lambda expression">
+<meta property="article:tag" content="my mistakes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/image-20250311220331108.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Mistakes related to Return and Parents</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Xiaowen-Yang">Projects</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/03/10/Complex-lambda-expression-and-some-mistakes/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&text=Mistakes related to Return and Parents"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&title=Mistakes related to Return and Parents"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&is_video=false&description=Mistakes related to Return and Parents"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Mistakes related to Return and Parents&body=Check out this article: http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&title=Mistakes related to Return and Parents"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&title=Mistakes related to Return and Parents"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&title=Mistakes related to Return and Parents"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&title=Mistakes related to Return and Parents"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&name=Mistakes related to Return and Parents&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&t=Mistakes related to Return and Parents"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Return"><span class="toc-number">1.</span> <span class="toc-text">Return</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Parent"><span class="toc-number">2.</span> <span class="toc-text">Parent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary"><span class="toc-number">3.</span> <span class="toc-text">Summary</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Additional-Notes"><span class="toc-number">3.1.</span> <span class="toc-text">Additional Notes</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Mistakes related to Return and Parents
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Xiaowen Yang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-11T13:05:59.000Z" class="dt-published" itemprop="datePublished">2025-03-11</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Computer-Programming/">Computer Programming</a> › <a class="category-link" href="/categories/Computer-Programming/CS-61A/">CS 61A</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/lambda-expression/" rel="tag">lambda expression</a>, <a class="p-category" href="/tags/my-mistakes/" rel="tag">my mistakes</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>In today’s course, I made <strong>two mistakes about the return and function’s parent.</strong> I think it is a good place to document the reasons and avoid same errors later.</p>
+<h2 id="Return"><a href="#Return" class="headerlink" title="Return"></a>Return</h2><p>Sometimes, when we create a <code>frame_1</code> and then call other function(<code>g</code>) before return.</p>
+<p>The second step, we have to wait for the <code>g</code> to return, then we have the <code>frame_1</code>‘s return. </p>
+<p>However, I tend to overlook this point when dealing with multiple lambda-expression used together. Here is an pedagogical but nasty example.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x: <span class="keyword">lambda</span> y: <span class="keyword">lambda</span> z: g(x + y + z)</span><br><span class="line"></span><br><span class="line">g = f(<span class="number">3</span>)</span><br><span class="line">h = f(<span class="number">4</span>)(<span class="number">5</span>)(<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Firstly, I know that function <code>g</code> is a lambda function <code>λ(y)</code>. As when we call function <code>f</code>, we pass the argument 3 to the parameter x, then we get the return <code>λ(y)</code>.</p>
+<p>Secondly,  we call function <code>f</code> again, passing the argument 4 to the <code>x</code>, then we get the return <code>λ(y)</code>.</p>
+<p>Thirdly, we call  <code>λ(y)</code>, passing the argument 5 to the y, then we get the return  <code>λ(z)</code>.</p>
+<p>Then, we call  <code>λ(z)</code>, passing the argument 6 to the <code>z</code>, then we return the <code>g</code> function. As I know function <code>g</code> is a lambda function <code>λ(y)</code>in the first step, I return the lambda function<code>λ(y)</code>.</p>
+<p>Lastly,  we call function <code>g</code>, that is <code>λ(y)</code>, then we pass 4+5+6&#x3D;15 to y and getting the return <code>λ(z)</code>, that is function <code>h</code>.</p>
+<p><strong>! ! ! Here, I made the mistake.</strong> Why? Looking at the wrong environment diagram, which using red color to highlight mistakes.</p>
+<p><img src="/../image/image-20250311220331108.png" alt="image-20250311220331108"></p>
+<ul>
+<li><p><strong>Error 1:</strong> </p>
+<p>In f4, we firstly call function <code>g</code>, so we should not return function g directly, but should pass the argument 4+5+6&#x3D;15 to the parameter y of function <code>g</code>. Then, we back to f4 to return the same of f5’s return.</p>
+</li>
+<li><p><strong>Error 2:</strong> </p>
+<p>The parent of f5 should be f1. <strong>The parent of a frame is determined by where it is created&#x2F;defined, that is, the parent of a frame is determined by th function’s parent</strong>Hence, as function <code>g</code> is <code>λ(y)</code>, also, <code>λ(y)</code> is calld in f1, the parent of f5 should be f1.</p>
+</li>
+</ul>
+<p>Here is a correct environment diagram.</p>
+<p><img src="/../image/image-20250311222406183.png" alt="image-20250311222406183"></p>
+<h2 id="Parent"><a href="#Parent" class="headerlink" title="Parent"></a>Parent</h2><p><strong>The parent of a function is determined by where it is created&#x2F;defined.</strong></p>
+<p>Here is a example, which using red color to highlight mistakes.</p>
+<p><img src="/../image/image-20250311232918892.png" alt="image-20250311232918892"></p>
+<ul>
+<li><p><strong>Error 1:</strong> </p>
+<p>λ(pr) is defined in Global, so the parent of it is Global. </p>
+</li>
+<li><p><strong>Error 2:</strong> </p>
+<p>We know that the parent of a frame is determined by where it is defined, also,  λ(pr)’s parent is Global. So, the parent of f4 is Global.</p>
+</li>
+</ul>
+<p>Here is a correct environment diagram.</p>
+<p><img src="/../image/image-20250311234735651.png" alt="image-20250311234735651"></p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>function’s parent</th>
+<th>frame’s parent <br />(Lexical Parent Scope)</th>
+<th>frame’s f_back<br /> (Call Stack Parent Frame)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Definition</strong></td>
+<td>Determined at definition time</td>
+<td>Determined at definition time</td>
+<td>Parent frame in the call stack, determined at runtime</td>
+</tr>
+<tr>
+<td><strong>Nature</strong></td>
+<td>Static</td>
+<td>Static</td>
+<td>Dynamic</td>
+</tr>
+<tr>
+<td><strong>Purpose</strong></td>
+<td>Variable lookup (scope chain)</td>
+<td>Variable lookup (scope chain)</td>
+<td>Track call stack (e.g., debugging, traceback)</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><strong>Lexical Parent Scope (parent)</strong></p>
+<p>Both <strong>function’s parent and frame’s parent</strong> in an Environment Diagram are <strong>static</strong>, determined by the <strong>definition</strong> context, and used for variable resolution along the scope chain.</p>
+</li>
+<li><p><strong>Call Stack Parent Frame (f_back)</strong></p>
+<p> The f_back of a frame is dynamic, determined by the runtime call stack, and used for tracking the sequence of function calls.</p>
+</li>
+</ul>
+<h3 id="Additional-Notes"><a href="#Additional-Notes" class="headerlink" title="Additional Notes"></a>Additional Notes</h3><ol>
+<li>When analyzing code execution, especially with nested functions or multiple lambda expressions, it’s easy to overlook the fact that <strong>a frame (frame_1) created by a function call must wait for inner function calls (e.g., g) to complete and return before frame_1 itself can return</strong>. This sequential dependency can lead to confusion in complex scenarios, such as when multiple lambda expressions are nested or chained together.</li>
+<li>Intrinsic name (when a function is created&#x2F;defined) is not as important as bound name, which is a factual function that we call.</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/Xiaowen-Yang">Projects</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Return"><span class="toc-number">1.</span> <span class="toc-text">Return</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Parent"><span class="toc-number">2.</span> <span class="toc-text">Parent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary"><span class="toc-number">3.</span> <span class="toc-text">Summary</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Additional-Notes"><span class="toc-number">3.1.</span> <span class="toc-text">Additional Notes</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&text=Mistakes related to Return and Parents"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&title=Mistakes related to Return and Parents"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&is_video=false&description=Mistakes related to Return and Parents"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Mistakes related to Return and Parents&body=Check out this article: http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&title=Mistakes related to Return and Parents"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&title=Mistakes related to Return and Parents"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&title=Mistakes related to Return and Parents"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&title=Mistakes related to Return and Parents"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&name=Mistakes related to Return and Parents&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/03/11/Mistakes-related-to-Return-and-Parents/&t=Mistakes related to Return and Parents"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Xiaowen Yang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Xiaowen-Yang">Projects</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
